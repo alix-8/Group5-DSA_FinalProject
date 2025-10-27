@@ -24,7 +24,7 @@ from datetime import datetime
 from ui import show_help
 
 
-# FOR FUTURE FEATURES
+# FOR FUTURE FEATURES (Bible Translation)
 # # -------------------------------------------------
 # #  SELECT BIBLE VERSION
 # # -------------------------------------------------
@@ -53,12 +53,6 @@ from ui import show_help
 #     bible_tree = load_bible(abs_path)
 #     print(f" {version_name} loaded successfully!\n")
 #     return bible_tree, version_name
-
-
-
-
-
-
 
 
 # # -------------------------------------------------
