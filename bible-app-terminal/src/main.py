@@ -21,7 +21,7 @@ from bookmark import add_bookmark, show_bookmarks
 from verse_of_day import verse_of_the_day
 from history import show_history
 from datetime import datetime
-from ui import show_help
+from ui import show_commands, clear_screen
 
 
 # FOR FUTURE FEATURES (Bible Translation)
@@ -63,9 +63,6 @@ from ui import show_help
 # print(f" Current Version: {current_version}")
 # print("Type 'help' for a list of commands.\n")
 
-
-
-
 # -------------------------------------------------
 #  GLOBAL CONFIGURATION
 # -------------------------------------------------
@@ -75,11 +72,24 @@ DATA_PATH = os.path.join(os.path.dirname(__file__), "../data/bible.txt")
 # Load Bible data into a hierarchical structure (Book → Chapter → Verse)
 bible_tree = load_bible(DATA_PATH)
 
-print(" Welcome to the Bible Search and Study App!")
-print("Type 'help' for a list of commands.\n")
+#Welcome message (landing screen)
+def welcome():
+    clear_screen()
+    book = [
+    "\t\t           __...--~~~~~-._   _.-~~~~~--...__",
+    "\t\t         //               `V'               \\\\ ",
+    "\t\t        //                 |                 \\\\ ",
+    "\t\t       //__...--~~~~~~-._  |  _.-~~~~~~--...__\\\\ ",
+    "\t\t      //__.....----~~~~._\\ | /_.~~~~----.....__\\\\",
+    "\t\t     ====================\\\\|//====================",
+    "\t\t                          `---`"
+    ]
 
-
-
+    for line in book:
+        print(line)
+    print("\t\t      Welcome to the Bible Search and Study App!")
+    show_commands()
+    main()
 
 # -------------------------------------------------
 #  MAIN PROGRAM LOOP
@@ -92,15 +102,18 @@ def main():
         # -----------------------------
         # EXIT PROGRAM
         # -----------------------------
+        if command.lower() == "home":
+            clear_screen()
+            welcome()
+            break
+        
+        # -----------------------------
+        # EXIT PROGRAM
+        # -----------------------------
         if command.lower() == "exit":
             print(" Exiting Bible Search App. Have a blessed day!")
+            clear_screen()
             break
-
-        # -----------------------------
-        # HELP MENU
-        # -----------------------------
-        elif command.lower() == "help":
-            show_help()
 
         # -----------------------------
         # SEARCH HANDLER
@@ -126,7 +139,7 @@ def main():
         # -----------------------------
         # BOOKMARKS HANDLER
         # -----------------------------
-        elif command.lower().startswith("bookmark"):
+        elif command.lower() == "bookmark":
             parts = command.split(" ", 2)
             if len(parts) < 3:
                 print(" Usage: bookmark <Book> <Chapter:Verse>")
@@ -141,7 +154,9 @@ def main():
                     print(" Invalid verse reference. Please check your input.")
 
         elif command.lower() == "bookmarks":
+            clear_screen()
             show_bookmarks()
+            show_commands()
 
         # -----------------------------
         # SEARCH HISTORY HANDLER
@@ -152,7 +167,9 @@ def main():
                 limit = int(parts[1])
                 show_history(limit)
             else:
+                clear_screen()
                 show_history()
+                show_commands()
 
     # Shell
     #   history 5 (shows only 5 searchess)
@@ -162,13 +179,15 @@ def main():
         # VERSE OF THE DAY
         # -----------------------------
         elif command.lower() == "verseofday":
+            clear_screen()
             verse_of_the_day(bible_tree)
+            show_commands()
 
         # -----------------------------
         # UNKNOWN COMMAND HANDLER
         # -----------------------------
         else:
-            print(" Unknown command. Type 'help' for available options.")
+            print(" Unknown command. The available options are displayed above.")
 
 
 # -------------------------------------------------
@@ -176,6 +195,7 @@ def main():
 # -------------------------------------------------
 if __name__ == "__main__":
     try:
+        welcome()
         main()
     except KeyboardInterrupt:
         print("\n Program terminated. Have a blessed day!")

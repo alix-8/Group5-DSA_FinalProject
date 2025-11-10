@@ -6,11 +6,11 @@ Manages all Bible search functionalities for the DSA Final Project.
 
 import re
 from history import add_history
+from ui import clear_screen, show_commands
 
 # Stores the most recent search results and current index for navigation
 last_results = []
 current_index = 0
-
 
 # -------------------------------------------------
 #  BOYER–MOORE SEARCH ALGORITHM
@@ -92,7 +92,9 @@ def search_verse(bible_tree, query, history):
 
             if choice == "b":
                 add_history(query)
+                clear_screen()
                 handle_book_search(bible_tree, book)
+
             elif choice == "t":
                 handle_text_search(bible_tree, query, history)
             else:
@@ -291,25 +293,31 @@ def show_current_verse():
     verse_ref, text = last_results[current_index]
     print(f"\n {verse_ref} — {text}")
     print(f"({current_index + 1} of {len(last_results)})")
-
+    show_commands()
 
 def navigation(command):
     """Handles navigation commands ('next' / 'prev')."""
     global current_index
     if not last_results:
         print("No active search results. Use 'search' first.")
+        clear_screen()
         return
 
     if command == "next":
         if current_index < len(last_results) - 1:
             current_index += 1
+            clear_screen()
         else:
+            clear_screen()
             print(" End of results reached.")
     elif command == "prev":
         if current_index > 0:
             current_index -= 1
+            clear_screen()
         else:
+            clear_screen()
             print(" You're at the first verse.")
+
     else:
         print("Invalid navigation command. Use 'next' or 'prev'.")
 
