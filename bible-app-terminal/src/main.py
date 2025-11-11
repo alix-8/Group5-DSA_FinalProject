@@ -111,8 +111,8 @@ def main():
         # EXIT PROGRAM
         # -----------------------------
         if command.lower() == "exit":
-            print(" Exiting Bible Search App. Have a blessed day!")
             clear_screen()
+            print(" Exiting Bible Search App. Have a blessed day!")
             break
 
         # -----------------------------

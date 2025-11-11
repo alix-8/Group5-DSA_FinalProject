@@ -287,7 +287,9 @@ def show_current_verse():
     """Displays the current verse result."""
     global current_index
     if not last_results:
+        clear_screen()
         print("No active search results. Use 'search <keyword>' first.")
+        show_commands()
         return
 
     verse_ref, text = last_results[current_index]
@@ -299,8 +301,9 @@ def navigation(command):
     """Handles navigation commands ('next' / 'prev')."""
     global current_index
     if not last_results:
-        print("No active search results. Use 'search' first.")
         clear_screen()
+        print("No active search results. Use 'search' first.")
+        show_commands()
         return
 
     if command == "next":
