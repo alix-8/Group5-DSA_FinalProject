@@ -133,6 +133,7 @@ def handle_text_search(bible_tree, query, history):
         show_current_verse()
     else:
         print(" No matching verses found.")
+        show_commands()
 
 
 # -------------------------------------------------
@@ -251,6 +252,7 @@ def find_book_key(bible_tree, short_name):
     matches = [book for book in bible_tree.keys() if book.lower().startswith(short_name)]
 
     if not matches:
+        clear_screen()
         print(f" No book found for '{short_name}'. Try typing more letters.")
         return None
 
@@ -278,7 +280,7 @@ def find_book_key(bible_tree, short_name):
                 print(" Invalid number. Try again.")
         except ValueError:
             print(" Please enter a valid number.")
-
+    show_commands()
 
 # -------------------------------------------------
 #  NAVIGATION SYSTEM

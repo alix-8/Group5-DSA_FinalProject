@@ -15,6 +15,7 @@ Features:
 """
 
 import os
+import sys
 from data_structure import load_bible
 from search import search_verse, navigation
 from bookmark import add_bookmark, show_bookmarks
@@ -100,7 +101,7 @@ def main():
         command = input("\n> ").strip()
 
         # -----------------------------
-        # EXIT PROGRAM
+        # HOME PROGRAM
         # -----------------------------
         if command.lower() == "home":
             clear_screen()
@@ -113,6 +114,7 @@ def main():
         if command.lower() == "exit":
             clear_screen()
             print(" Exiting Bible Search App. Have a blessed day!")
+            sys.exit()
             break
 
         # -----------------------------
